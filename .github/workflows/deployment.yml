@@ -12,7 +12,7 @@ jobs:
       - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
         with:
           server-name: "docker-ce"
-          server-image: "docker-ce"
+          server-image: "Ubuntu-20.04"
           server-type: "cax11"
           ssh-key-name: "default"
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
