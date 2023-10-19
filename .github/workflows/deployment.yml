@@ -7,12 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: Ubuntu-20.04
+    runs-on: Ubuntu-22.04
     steps:
       - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
         with:
           server-name: docker-ce-ubuntu-4gb-hel1-4
-          server-image: docker-ce
+          server-image: Ubuntu-22.04
           server-type: cax11
           ssh-key-name: kn@DESKTOP-JSOLO15
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
