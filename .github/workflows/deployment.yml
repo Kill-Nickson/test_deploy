@@ -16,7 +16,8 @@ jobs:
           server-type: cax11
           ssh-key-name: kn@DESKTOP-JSOLO15
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
-          floating-ip-id: '41708469'
+          floating-ip-id: ${{ secrets.FLOATING_IP_ID }}
+          floating-ip-assignment-timeout: 30000
 
 #jobs:
 #  build:
