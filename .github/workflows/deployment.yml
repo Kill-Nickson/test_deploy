@@ -16,8 +16,8 @@ jobs:
           server-type: cax112
           ssh-key-name: default2
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
-          floating-ip-id: 417102502
-          floating-ip-assignment-timeout: 300002
+#          floating-ip-id: 41710250
+#          floating-ip-assignment-timeout: 300002
 #
 #jobs:
 #  build:
