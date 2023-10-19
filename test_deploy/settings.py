@@ -140,3 +140,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ["https://api.secjur.test:4433", "https://127.0.0.1:4433"]
+#
