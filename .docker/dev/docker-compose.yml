@@ -36,7 +36,10 @@ services:
     image: nginx:stable-alpine
     depends_on:
       - app
+    environment:
+      - SSL_CERT_FILENAME=_wildcard.secjur.test.pem
+      - SSL_KEY_FILENAME=_wildcard.secjur.test-key.pem
     volumes:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
     ports:
-      - 127.0.0.1:8000:8000
+      - 127.0.0.1:4433:433
