@@ -14,6 +14,6 @@ jobs:
           server-name: "docker-ce"
           server-image: "docker-ce"
           server-type: "cax11"
-          ssh-key-name: default
-          hcloud-token: HnpUy2b6WqdQJfftl3uQFRj1Uxtgk16hmCqOEsnEvFMs8yvNPXVa6vDg4xAGzmR4
+          ssh-key-name: "default"
+          hcloud-token: "HnpUy2b6WqdQJfftl3uQFRj1Uxtgk16hmCqOEsnEvFMs8yvNPXVa6vDg4xAGzmR4"
           floating-ip-id: "41712547"
