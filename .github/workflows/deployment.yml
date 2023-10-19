@@ -7,16 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: Ubuntu-20.04
+    runs-on: Ubuntu-22.04
     steps:
       - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
         with:
           server-name: "docker-ce"
-          server-image: "Ubuntu-20.04"
-          server-type: "cax11"
+          server-image: "docker-ce"
+          server-type: "CAX11"
           ssh-key-name: "default"
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
-#          floating-ip-id: 41710250
+#          floating-ip-id: 41712547
 #          floating-ip-assignment-timeout: 300002
 #
 #jobs:
