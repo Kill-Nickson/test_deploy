@@ -1,0 +1,18 @@
+name: 'Build and deploy docker image'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: Ubuntu-20.04
+    steps:
+      - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
+        with:
+          server-name: "docker-ce-ubuntu-4gb-hel1-4"
+          server-image: "docker-ce"
+          server-type: "cax11"
+          ssh-key-name: "kn@DESKTOP-JSOLO15"
+          hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
