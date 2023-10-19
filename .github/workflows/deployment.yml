@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
         with:
-          server-name: "docker-ce-ubuntu-4gb-hel1-4"
-          server-image: "docker-ce"
-          server-type: "cax11"
-          ssh-key-name: "kn@DESKTOP-JSOLO15"
+          server-name: docker-ce-ubuntu-4gb-hel1-4
+          server-image: docker-ce
+          server-type: cax11
+          ssh-key-name: kn@DESKTOP-JSOLO15
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
           floating-ip-id: floating-ip-id
 
