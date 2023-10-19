@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: TimDaub/hetzner-cloud-deploy-server-action@v2
         with:
-          server-name: docker-ce
-#          server-image: docker-ce
-#          server-type: CAX11
-#          ssh-key-name: default
+          server-name: "docker-ce"
+          server-image: "docker-ce"
+          server-type: "cax11"
+          ssh-key-name: default
           hcloud-token: HnpUy2b6WqdQJfftl3uQFRj1Uxtgk16hmCqOEsnEvFMs8yvNPXVa6vDg4xAGzmR4
 #          floating-ip-id: 41712547
 #          floating-ip-assignment-timeout: 300002
