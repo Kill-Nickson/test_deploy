@@ -1,0 +1,47 @@
+version: "3"
+
+volumes:
+  postgres_data:
+  asset-volume:
+
+services:
+  db:
+    image: local/postgres
+    build:
+      context: ../.
+      dockerfile: ./Dockerfile.postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:5434:5432
+
+  app:
+    image: local/app
+    build:
+      context: ../../.
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    environment:
+      - BEHIND_PROXY=nginx
+    volumes:
+      - ../../.:/app
+      - asset-volume:/app/static
+
+  nginx:
+    image: nginx:stable-alpine
+    depends_on:
+      - app
+#      - ext
+    environment:
+      - SSL_CERT_FILENAME=_wildcard.secjur.test.pem
+      - SSL_KEY_FILENAME=_wildcard.secjur.test-key.pem
+    volumes:
+      - "D:/certificates:/etc/nginx/certs"
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
+    ports:
+      - 127.0.0.1:4433:433

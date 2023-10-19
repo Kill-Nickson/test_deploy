@@ -1,0 +1,79 @@
+version: "3"
+
+volumes:
+  postgres_data:
+  jupyter:
+
+services:
+  db:
+    image: local/postgres
+    build:
+      context: ../.
+      dockerfile: ./Dockerfile.postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  redis:
+    image: redis
+    ports:
+      - "127.0.0.1:6379:6379"
+
+  app: &app
+    image: local/app
+    build:
+      context: ../../.
+      dockerfile: ./.docker/Dockerfile.app
+    depends_on:
+      - db
+      - redis
+    environment:
+      - BEHIND_PROXY=nginx
+      # - DJANGO_SETTINGS_MODULE=core.settings.profile
+    volumes:
+      - ../../.:/app
+
+  celery_default:
+    <<: *app
+    command: celery -A core worker -l Info -O fair -P threads -c 100 -E -n default@%h
+
+  celery_smtp:
+    <<: *app
+    command: celery -A core worker -l Info -P threads -c 3 -Q smtp -E -n smtp@%h
+
+  celery_beat:
+    <<: *app
+    command: celery -A core beat -S redbeat.RedBeatScheduler
+
+  flower:
+    <<: *app
+    command: celery -A core flower
+
+  nb:
+    <<: *app
+    volumes:
+      - ../../.:/app
+      - jupyter:/root/.jupyter
+    command: python manage.py shell_plus --notebook -- --allow-root --ip=*
+
+  smtp:
+    image: reachfive/fake-smtp-server
+
+  nginx:
+    image: nginx:stable-alpine
+    depends_on:
+      - app
+      - ext
+    environment:
+      - SSL_CERT_FILENAME=_wildcard.secjur.test.crt
+      - SSL_KEY_FILENAME=_wildcard.secjur.test.key
+    volumes:
+      - "/path/to/cert/dir:/etc/nginx/certs"
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
+    ports:
+      - "127.0.0.1:4433:433"

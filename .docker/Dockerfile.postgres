@@ -1,0 +1,16 @@
+FROM alpine:3.16
+RUN apk add --no-cache openssl
+WORKDIR /ca
+RUN echo $(openssl rand -base64 21) > /pass
+RUN openssl req -passout pass:$(cat /pass) -subj "/CN=secjur.test" -new -text -out server.req
+RUN openssl rsa -in privkey.pem -out server.key -passin pass:$(cat /pass)
+RUN rm privkey.pem
+RUN openssl req -x509 -in server.req -text -key server.key -out server.crt
+
+
+FROM postgres:alpine
+COPY --from=0 /ca/server.key /ca/server.key
+COPY --from=0 /ca/server.crt /ca/server.crt
+RUN chown -R postgres:postgres /ca
+RUN chmod 600 /ca/server.key
+CMD ["postgres", "-c", "ssl=on", "-c", "ssl_cert_file=/ca/server.crt", "-c", "ssl_key_file=/ca/server.key"]
