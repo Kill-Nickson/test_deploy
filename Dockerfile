@@ -29,7 +29,7 @@ RUN pip install psycopg2-binary gunicorn
 COPY . .
 
 # generate static files & translations
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 # RUN python manage.py collectstatic --settings "test_deploy.settings"
 # RUN python manage.py compilemessages
 
