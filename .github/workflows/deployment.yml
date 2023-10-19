@@ -16,5 +16,5 @@ jobs:
           server-type: CAX11
           ssh-key-name: default
           hcloud-token: HnpUy2b6WqdQJfftl3uQFRj1Uxtgk16hmCqOEsnEvFMs8yvNPXVa6vDg4xAGzmR4
-          floating-ip-id: 41712547
-          floating-ip-assignment-timeout: 300002
+#          floating-ip-id: 41712547
+#          floating-ip-assignment-timeout: 300002
