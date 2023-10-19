@@ -26,6 +26,7 @@ DEBUG = True  # env('DEBUG')
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "test-deploy.com"
     # "api.secjur.test"
 ]
 
@@ -142,4 +143,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     # "https://api.secjur.test:4433",
     "https://127.0.0.1:8000"
+    "http://test-deploy.com"
 ]
