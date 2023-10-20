@@ -1,10 +1,6 @@
 server {
 
-    listen 433 ssl;
-    server_name  test-deploy.com;
-    ssl_certificate /etc/nginx/certs/${SSL_CERT_FILENAME};
-    ssl_certificate_key /etc/nginx/certs/${SSL_KEY_FILENAME};
-
+    listen 80;
 
     location / {
         proxy_pass http://app:8000/;

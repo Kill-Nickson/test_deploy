@@ -37,24 +37,4 @@ RUN pip install -r requirements.txt
 
 RUN pip install psycopg2-binary
 
-# RUN mkdir -p /root/.jupyter
-# RUN echo '{"NotebookApp": { \
-#   "allow_origin": "https://nb.secjur.test:4433",\
-#   "port": 8888,\
-#   "open_browser": false,\
-#   "allow_remote_access": true,\
-#   "allow_password_change": true,\
-#   "trust_xheaders": true,\
-#   "custom_display_url": "nb.secjur.test",\
-#   "quit_button": false\
-#   }\
-#   }\
-#   ' > /root/.jupyter/jupyter_notebook_config.json
-
-# Install Azure CLI
-# RUN pip install --no-cache-dir --prefer-binary azure-cli
-
-# For jupyter notebook
-# EXPOSE 8888
-
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

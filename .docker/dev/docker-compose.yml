@@ -42,4 +42,4 @@ services:
     volumes:
       - ./nginx.conf.template:/etc/nginx/templates/default.conf.template
     ports:
-      - 127.0.0.1:4433:433
+      - 127.0.0.1:8000:80

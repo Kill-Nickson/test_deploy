@@ -2,7 +2,7 @@ FROM alpine:3.16
 RUN apk add --no-cache openssl
 WORKDIR /ca
 RUN echo $(openssl rand -base64 21) > /pass
-RUN openssl req -passout pass:$(cat /pass) -subj "/CN=secjur.test" -new -text -out server.req
+RUN openssl req -passout pass:$(cat /pass) -subj "/CN=deploy.test" -new -text -out server.req
 RUN openssl rsa -in privkey.pem -out server.key -passin pass:$(cat /pass)
 RUN rm privkey.pem
 RUN openssl req -x509 -in server.req -text -key server.key -out server.crt
